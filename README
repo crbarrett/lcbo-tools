@@ -1,0 +1,11 @@
+Abstract:
+Aggregations of lcboapi.com tools for use in driving new product feeds and other utils as desired.
+
+Design:
+All Spring3 based MVC/WS using jdbc and rest template objects.
+
+Testing:
+Only the dataset methods have any testing.
+
+Future:
+Anything simple that I'm missing in the LCBO api.
