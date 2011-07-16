@@ -23,6 +23,7 @@ import org.cbarrett.lcbo.domain.Dataset;
 import org.cbarrett.lcbo.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LCBOServiceImpl implements LCBOService {
@@ -35,6 +36,7 @@ public class LCBOServiceImpl implements LCBOService {
 	@Autowired
 	private LCBONewProductDAO lcboNewProductDAO;
 	
+	@Transactional
 	public String resetDatasets() {
 		// drop the current lcbo dataset content
 		lcboDatasetDAO.truncate();
@@ -61,6 +63,7 @@ public class LCBOServiceImpl implements LCBOService {
 		return newDs.toString();
 	}
 	
+	@Transactional
 	public String getMissingDatasets() {
 		// find newest dataset (all, but paged)
 		List<Dataset> ds = lcboClient.getDatasetsFirstPage();
@@ -113,6 +116,7 @@ public class LCBOServiceImpl implements LCBOService {
 	public void findStoresWithProduct(String cspc, String location) {
 		
 	}
+	
 	public void findStores(String location) {
 		
 	}

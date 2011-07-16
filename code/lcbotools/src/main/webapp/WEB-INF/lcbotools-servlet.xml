@@ -83,7 +83,7 @@
 			<value>classpath:database.properties</value>
 		</property>
 	</bean>
-	<!-- the DataSource (parameterized for configuration via a PropertyPlaceHolderConfigurer) -->
+	<!-- the DataSource (parameterised for configuration via a PropertyPlaceHolderConfigurer) -->
 	<bean id="dataSource" destroy-method="close"
 		class="com.jolbox.bonecp.BoneCPDataSource">
 		<property name="driverClass" value="${jdbc.driverClassName}" />
@@ -99,6 +99,10 @@
 		<property name="statementsCacheSize" value="100" />
 		<property name="releaseHelperThreads" value="3" />
 	</bean>
+	<!-- transaction manager for above data source -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>	
 
 	<import resource="lcbo-dao.xml" />
 	<import resource="lcborest-beans.xml" />
