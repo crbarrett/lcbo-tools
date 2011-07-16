@@ -4,11 +4,11 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 
 -- -----------------------------------------------------
--- Table `lcbotoolsdb`.`dataset`
+-- Table `lcbodb`.`dataset`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `lcbotoolsdb`.`dataset` ;
+DROP TABLE IF EXISTS `lcbodb`.`dataset` ;
 
-CREATE  TABLE IF NOT EXISTS `lcbotoolsdb`.`dataset` (
+CREATE  TABLE IF NOT EXISTS `lcbodb`.`dataset` (
   `id_dataset` INT NOT NULL ,
   `total_products` INT UNSIGNED NULL ,
   `total_stores` INT UNSIGNED NULL ,
@@ -22,11 +22,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `lcbotoolsdb`.`new_products`
+-- Table `lcbodb`.`new_products`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `lcbotoolsdb`.`new_products` ;
+DROP TABLE IF EXISTS `lcbodb`.`new_products` ;
 
-CREATE  TABLE IF NOT EXISTS `lcbotoolsdb`.`new_products` (
+CREATE  TABLE IF NOT EXISTS `lcbodb`.`new_products` (
   `id_new_products` INT NOT NULL AUTO_INCREMENT ,
   `cspc` VARCHAR(45) NOT NULL ,
   `producer_name` VARCHAR(200) NULL ,
@@ -42,6 +42,8 @@ CREATE  TABLE IF NOT EXISTS `lcbotoolsdb`.`new_products` (
   `secondary_category` VARCHAR(45) NULL ,
   `released_on` DATETIME NULL ,
   `inventory_count` INT NULL ,
+  `image_thumb_url` VARCHAR(200) NULL ,
+  `image_url` VARCHAR(200) NULL ,
   `updated_at` DATETIME NULL ,
   `created_dt` DATETIME NULL ,
   `updated_dt` DATETIME NULL ,
@@ -49,13 +51,13 @@ CREATE  TABLE IF NOT EXISTS `lcbotoolsdb`.`new_products` (
   UNIQUE INDEX `cspc_UNIQUE` (`cspc` ASC) )
 ENGINE = InnoDB;
 
-USE `lcbotoolsdb`;
+USE `lcbodb`;
 
 DELIMITER $$
 
-USE `lcbotoolsdb`$$
-DROP TRIGGER IF EXISTS `lcbotoolsdb`.`dataset_insert_timestamp` $$
-USE `lcbotoolsdb`$$
+USE `lcbodb`$$
+DROP TRIGGER IF EXISTS `lcbodb`.`dataset_insert_timestamp` $$
+USE `lcbodb`$$
 
 
 
@@ -85,9 +87,9 @@ DELIMITER ;
 
 DELIMITER $$
 
-USE `lcbotoolsdb`$$
-DROP TRIGGER IF EXISTS `lcbotoolsdb`.`new_products_insert_timestamp` $$
-USE `lcbotoolsdb`$$
+USE `lcbodb`$$
+DROP TRIGGER IF EXISTS `lcbodb`.`new_products_insert_timestamp` $$
+USE `lcbodb`$$
 
 
 

@@ -74,6 +74,8 @@ public class Product implements DomainObject {
 	private String servingSuggestion;
 	private String tastingNote;
 	private DateTime updatedAt;
+	private String image_thumb_url;
+	private String image_url;
 	private String productNo;
 	
 	public String getId() {
@@ -195,6 +197,12 @@ public class Product implements DomainObject {
 	}
 	public DateTime getUpdatedAt() {
 		return updatedAt;
+	}
+	public String getImageThumbUrl() {
+		return image_thumb_url;
+	}
+	public String getImageUrl() {
+		return image_url;
 	}
 	public String getProductNo() {
 		return productNo;
@@ -333,6 +341,14 @@ public class Product implements DomainObject {
 	@JsonProperty("updated_at")
 	public void setUpdatedAt(DateTime updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	@JsonProperty("image_thumb_url")
+	public void setImageThumbUrl(String image) {
+		this.image_thumb_url = image;
+	}
+	@JsonProperty("image_url")
+	public void setImageUrl(String image) {
+		this.image_url = image;
 	}
 	@JsonProperty("product_no")
 	public void setProductNo(String productNo) {

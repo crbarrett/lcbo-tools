@@ -42,7 +42,7 @@ public class LCBOProductExtractor implements ResultSetExtractor<Product> {
 		prod.setOrigin(rs.getString(10));
 		prod.setPrimary_category(rs.getString(11));
 		prod.setSecondary_category(rs.getString(12));
-		
+				
 		if (rs.getTimestamp(13) != null) {
 			prod.setReleasedOn(new DateTime((rs.getTimestamp(13)).getTime()));
 		}
@@ -50,6 +50,10 @@ public class LCBOProductExtractor implements ResultSetExtractor<Product> {
 		if (rs.getTimestamp(15) != null) {
 			prod.setUpdatedAt(new DateTime((rs.getTimestamp(15)).getTime()));
 		}
+		
+		prod.setImageThumbUrl(rs.getString(15));
+		prod.setImageUrl(rs.getString(16));
+		
 		
 		return prod;
 	}
