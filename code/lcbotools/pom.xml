@@ -41,6 +41,16 @@
 
 	<dependencies>
 		<dependency>
+		    <groupId>org.cbarrett</groupId>
+		    <artifactId>domain-ext</artifactId>
+		    <version>0.0.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.cbarrett</groupId>
+		    <artifactId>spring-ext</artifactId>
+		    <version>0.0.1</version>
+		</dependency>
+		<dependency>
 		    <groupId>com.sun.syndication</groupId>
 		    <artifactId>com.springsource.com.sun.syndication</artifactId>
 		    <version>1.0.0.RC1</version>
