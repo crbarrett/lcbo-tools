@@ -39,7 +39,7 @@
 				<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
 					<property name="contentType" value="text/xml" />
 					<property name="marshaller">
-						<bean class="org.cbarrett.common.view.XStreamMarshallerWithPI">
+						<bean class="org.cbarrett.common.spring.view.XStreamMarshallerWithPI">
 							<property name="autodetectAnnotations" value="true" />
 						</bean>
 					</property>
