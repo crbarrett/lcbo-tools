@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>404</title>
-	<link rel="stylesheet" type="text/css" href="../static/css/simple.css" />	
+	<link rel="stylesheet" type="text/css" href="css/simple.css" />	
 </head>
 <body>
 	<h1>Oops ... Page not found!</h1>

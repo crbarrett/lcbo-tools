@@ -16,6 +16,9 @@
 
 	<tx:annotation-driven />
 	<mvc:annotation-driven />
+	
+	<!-- static resource handling -->
+	<mvc:default-servlet-handler/>
 
 	<!-- Rest content negotiation and view handling -->
 	<bean
