@@ -38,7 +38,7 @@ public class NewProductAtomView extends AbstractAtomFeedView {
 
 	@Override
 	protected void buildFeedMetadata(Map<String, Object> model, Feed feed, HttpServletRequest request) {
-		feed.setId("tag:scotchbaby.com");
+		feed.setId("tag:lcbobaby.com");
 		feed.setTitle("New LCBO Product Listings");
 		@SuppressWarnings("unchecked")
 		List<Product> productList = (List<Product>) model.get("newProducts");
