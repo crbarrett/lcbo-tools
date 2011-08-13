@@ -48,7 +48,7 @@ public class LCBOClient {
         client.getParams().setCookiePolicy(CookiePolicy.IGNORE_COOKIES);
         client.getParams().setParameter("http.protocol.version", HttpVersion.HTTP_1_1);
         client.getParams().setParameter("http.protocol.content-charset", "UTF-8");
-        client.getParams().setParameter("http.useragent", "scotch-services");
+        client.getParams().setParameter("http.useragent", "lcbo-tools");
     }
     
     public List<Dataset> getDatasetsFirstPage() {
