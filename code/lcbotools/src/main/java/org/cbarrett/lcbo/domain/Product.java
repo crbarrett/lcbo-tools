@@ -241,7 +241,7 @@ public class Product implements DomainObject {
 	public void setBonus_reward_miles(int bonusRewardMiles) {
 		bonus_reward_miles = bonusRewardMiles;
 	}
-	@JsonDeserialize(using = JsonDateTimeDeserializer.class)
+	@JsonDeserialize(using = JsonShortDateDeserializer.class)
 	@JsonProperty("bonus_reward_miles_ends_on")
 	public void setBonusRewardMilesEndsOn(DateTime bonusRewardMilesEndsOn) {
 		this.bonusRewardMilesEndsOn = bonusRewardMilesEndsOn;
