@@ -198,6 +198,9 @@ public class Product implements DomainObject {
 	public DateTime getUpdatedAt() {
 		return updatedAt;
 	}
+	public java.util.Date getUpdatedAtJavaDate() {
+		return updatedAt.toDate();
+	}
 	public String getImageThumbUrl() {
 		return image_thumb_url;
 	}

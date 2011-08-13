@@ -2,3 +2,16 @@
 * { 
 	font-family: tahoma, helvetica, arial, sans serif;
 }
+
+/* DisplayTag table formatting */
+table, th, td
+{
+border: 1px solid black;
+}
+
+table.main.tr.even { 
+color:lightblue; 
+} 
+table.main.tr.odd { 
+color:white; 
+}
