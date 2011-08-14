@@ -22,6 +22,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.cbarrett.common.util.TimeFormats;
 import org.cbarrett.lcbo.domain.Product;
 import org.joda.time.DateTime;
 import org.springframework.web.servlet.view.feed.AbstractAtomFeedView;
@@ -29,6 +30,7 @@ import org.springframework.web.servlet.view.feed.AbstractAtomFeedView;
 import com.sun.syndication.feed.atom.Content;
 import com.sun.syndication.feed.atom.Entry;
 import com.sun.syndication.feed.atom.Feed;
+import com.sun.syndication.feed.atom.Link;
 
 /**
  * @author cbarrett
@@ -36,9 +38,11 @@ import com.sun.syndication.feed.atom.Feed;
  */
 public class NewProductAtomView extends AbstractAtomFeedView {
 
+	private static final String LCBO_LINK = "http://lcbo.com/lcbo-ear/lcbo/product/details.do?language=EN&itemNumber=";
+			
 	@Override
 	protected void buildFeedMetadata(Map<String, Object> model, Feed feed, HttpServletRequest request) {
-		feed.setId("tag:lcbosuperstuff.com");
+		feed.setId("tag:lcbobaby.com");
 		feed.setTitle("New LCBO Product Listings");
 		@SuppressWarnings("unchecked")
 		List<Product> productList = (List<Product>) model.get("newProducts");
@@ -68,17 +72,43 @@ public class NewProductAtomView extends AbstractAtomFeedView {
 			
 			String date = String.format("%1$tY-%1$tm-%1$td", (curr.getUpdatedAt() == null) ? new java.util.Date() : curr.getUpdatedAt().toDate());
 
-			// see http://diveintomark.org/archives/2004/05/28/howto-atom-id#other
-			entry.setId(String.format("tag:scotchbaby.com,%s:%s", date, curr.getId()));
+			entry.setId(String.format("tag:lcbobaby.com,%s:%s", date, curr.getId()));
 			entry.setTitle(String.format("%s", curr.getName()));
+			
+			List<Link> alternateLinks = new ArrayList<Link>();
+			Link link = new Link();
+			link.setHref(LCBO_LINK + curr.getId());
+			link.setType("text/html");
+			alternateLinks.add(link);
+			entry.setAlternateLinks(alternateLinks);
+			
 			if (curr.getUpdatedAt() != null) {
 				entry.setUpdated(curr.getUpdatedAt().toDate());
 			} else {
 				entry.setUpdated(new java.util.Date());
 			}
 
+			StringBuilder content = new StringBuilder();
+			content.append(curr.getProducer_name());
+			content.append("\n");
+			content.append(curr.getPrimary_category());
+			content.append(" (" + curr.getSecondary_category() + ")");
+			content.append("\n");
+			content.append(curr.getOrigin());
+			content.append("\n");
+			if (curr.getReleasedOn() != null) {
+				content.append("Released On: ");
+				content.append(curr.getReleasedOn().toString(TimeFormats.iso8601DateOnlyFormat));
+				content.append("\n");
+			}
+			content.append("<b>");
+			content.append(curr.getId());
+			content.append("         ");
+			content.append("$" + curr.getPrice_in_cents()/100);
+			content.append("</b>");
+			
 			Content summary = new Content();
-			summary.setValue(curr.toString());
+			summary.setValue(content.toString());
 			entry.setSummary(summary);
 			
 			entries.add(entry);
