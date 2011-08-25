@@ -25,6 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyFactory;
+
 @Service
 public class LCBOServiceImpl implements LCBOService {
 	
@@ -32,22 +35,23 @@ public class LCBOServiceImpl implements LCBOService {
 	LCBOClient lcboClient;
 	
 	@Autowired
-	private LCBODatasetDAO lcboDatasetDAO;
-	@Autowired
-	private LCBONewProductDAO lcboNewProductDAO;
+	private ObjectifyFactory objectifyFactory;
 	
 	@Transactional
 	public String resetDatasets() {
+		
+		Objectify ofy = objectifyFactory.begin();
+		
 		// drop the current lcbo dataset content
-		lcboDatasetDAO.truncate();
-		lcboNewProductDAO.truncate();
+		//lcboDatasetDAO.truncate();
+		//lcboNewProductDAO.truncate();
 		
 		// find newest dataset (all, but paged)
 		List<Dataset> ds = lcboClient.getDatasetsFirstPage();
 				
 		Dataset newDs = ds.get(0);
 		// store latest
-		lcboDatasetDAO.add(newDs);
+		ofy.put(newDs);
 
 		List<String> cspcList = newDs.getAddedProductIds();
 		int newProductCount = cspcList.size();
@@ -57,7 +61,7 @@ public class LCBOServiceImpl implements LCBOService {
 			Product currentProduct = lcboClient.getProduct(currentCspc);
 			
 			// save new product
-			lcboNewProductDAO.add(currentProduct);
+			ofy.put(currentProduct);
 		}
 
 		return newDs.toString();
@@ -68,22 +72,25 @@ public class LCBOServiceImpl implements LCBOService {
 		// find newest dataset (all, but paged)
 		List<Dataset> ds = lcboClient.getDatasetsFirstPage();
 		
+		Objectify ofy = objectifyFactory.begin();
+
 		// current latest dataset
-		int currentDsId = ds.get(0).getId();
-		int maxStoredDsId = -1;
-		maxStoredDsId = lcboDatasetDAO.getMaxId();
+		long currentDsId = ds.get(0).getId();
+		long maxStoredDsId = -1;
+		maxStoredDsId = 1;
+				//ofy.getMaxId();
 		if (maxStoredDsId == -1) {
 			// store latest
-			lcboDatasetDAO.add(ds.get(0));			
+			ofy.put(ds.get(0));			
 		}
 		
 		// retrieve missing datasets (or start with latest)
 		if (maxStoredDsId != -1) {
-			for (int i = maxStoredDsId + 1; i <= currentDsId; i++) {
+			for (long i = maxStoredDsId + 1; i <= currentDsId; i++) {
 				Dataset missingDs = lcboClient.getDataset(i);
 
 				// store this ds
-				lcboDatasetDAO.add(missingDs);
+				ofy.put(missingDs);
 				
 				List<String> cspcList = missingDs.getAddedProductIds();
 				int newProductCount = cspcList.size();
@@ -93,7 +100,7 @@ public class LCBOServiceImpl implements LCBOService {
 					Product currentProduct = lcboClient.getProduct(currentCspc);
 					
 					// save new product (skip existing cspcs)
-					lcboNewProductDAO.add(currentProduct);
+					ofy.put(currentProduct);
 				}
 			}
 		}
@@ -102,7 +109,10 @@ public class LCBOServiceImpl implements LCBOService {
 	}
 
 	public List<Product> getNewProductList() {
-		return lcboNewProductDAO.selectAll();
+		Objectify ofy = objectifyFactory.begin();
+		List<Product> products = ofy.query(Product.class).list();
+		
+		return products;
 	}
 	
 	public Product getProductDetails(String cspc) {
@@ -120,5 +130,4 @@ public class LCBOServiceImpl implements LCBOService {
 	public void findStores(String location) {
 		
 	}
-
 }

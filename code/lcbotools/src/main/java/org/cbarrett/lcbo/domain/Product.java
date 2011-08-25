@@ -15,6 +15,10 @@
  */
 package org.cbarrett.lcbo.domain;
 
+import javax.persistence.Id;
+
+import com.googlecode.objectify.annotation.Entity;
+
 import org.cbarrett.common.domain.DomainObject;
 import org.cbarrett.common.util.TimeFormats;
 import org.cbarrett.lcbo.domain.serializer.JsonDateTimeDeserializer;
@@ -23,6 +27,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.joda.time.DateTime;
 
+@Entity
 public class Product implements DomainObject {
 	
 	public enum StockType {
@@ -32,6 +37,7 @@ public class Product implements DomainObject {
 		XD, D, MD, M, MS, S
 	}
 	
+	@Id
 	private String id;
 	private Boolean is_dead;
 	private String name;

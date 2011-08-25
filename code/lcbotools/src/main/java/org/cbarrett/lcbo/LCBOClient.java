@@ -62,8 +62,8 @@ public class LCBOClient {
        	return resp.getDataset();  	
     }
 
-    public Dataset getDataset(int dataset) {
-        DatasetResponse resp = restTemplate.getForObject(baseURL + "/" + datasetsServ + "/" + Integer.valueOf(dataset).toString(), DatasetResponse.class);
+    public Dataset getDataset(long dataset) {
+        DatasetResponse resp = restTemplate.getForObject(baseURL + "/" + datasetsServ + "/" + Long.valueOf(dataset).toString(), DatasetResponse.class);
         checkStatus(resp.getStatus(), resp.getMessage());
        	return resp.getDataset();  	
     }

@@ -11,6 +11,9 @@
 				http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 				http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
 
+	<!-- objectify data objects -->
+	<bean class="com.googlecode.objectify.spring.ObjectifyFactoryBean" p:basePackage="org.cbarrett.lcbo.domain" />
+
 	<!-- LCBO Dao Objects -->
 	<bean id="lcboDatasetDao" class="org.cbarrett.lcbo.db.LCBODatasetDAOImpl">
 		<property name="dataSource" ref="dataSource" />

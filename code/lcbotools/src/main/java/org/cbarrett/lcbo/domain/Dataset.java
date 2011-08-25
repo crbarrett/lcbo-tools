@@ -15,7 +15,11 @@
  */
 package org.cbarrett.lcbo.domain;
 
+import com.googlecode.objectify.annotation.Entity;
+
 import java.util.List;
+
+import javax.persistence.Id;
 
 import org.cbarrett.common.domain.DomainObject;
 import org.cbarrett.common.util.TimeFormats;
@@ -24,8 +28,10 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.joda.time.DateTime;
 
+@Entity
 public class Dataset implements DomainObject {
-	private int id;
+	@Id
+	private long id;
 	private int totalProducts;
 	private int totalStores;
 	private int totalInventories;
@@ -62,7 +68,7 @@ public class Dataset implements DomainObject {
 	// "updated_at": "2011-03-05T06:02:33+00:00",
 	// "csv_dump": "http://static.lcboapi.com/datasets/61.zip"
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -215,7 +221,7 @@ public class Dataset implements DomainObject {
 		final int prime = 31;
 		int result = 1;
 		
-		result = prime * result + id;
+		result = prime * result + (int) id;
 		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
 		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
 		result = prime * result + ((csvDump == null) ? 0 : csvDump.hashCode());
@@ -246,7 +252,7 @@ public class Dataset implements DomainObject {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder(Dataset.class.getSimpleName());
-		sb.append(" [" + "id: " + Integer.valueOf(id).toString() + ", ");
+		sb.append(" [" + "id: " + Long.valueOf(id).toString() + ", ");
 		sb.append("createdAt: "
 				+ createdAt.toString(TimeFormats.stdOutputFormat) + ", ");
 		sb.append("updatedAt: "
