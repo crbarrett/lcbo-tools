@@ -21,8 +21,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 
 import org.cbarrett.lcbo.db.mapper.LCBOProductRowMapper;
 import org.cbarrett.lcbo.domain.Product;
@@ -32,7 +31,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
 public class LCBONewProductDAOImpl implements LCBONewProductDAO {
 		
-    static private Log _log = LogFactory.getLog("LCBONewProductDAOImpl");
+	private final static Logger _log = Logger.getLogger(LCBONewProductDAOImpl.class.getName());
 		    
     private SimpleJdbcTemplate simpleJdbcTemplate;    
     private SimpleJdbcInsert insertDataset;
