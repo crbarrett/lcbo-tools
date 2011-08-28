@@ -27,13 +27,7 @@
 		</property>
 	</bean>
 
-	<bean id="httpClientParams" class="org.apache.commons.httpclient.params.HttpClientParams">
-		<property name="connectionManagerClass"
-			value="org.apache.commons.httpclient.MultiThreadedHttpConnectionManager" />
-	</bean>
-	<bean id="httpClient" class="org.apache.commons.httpclient.HttpClient">
-		<constructor-arg ref="httpClientParams" />
-	</bean>
+	<bean id="httpClient" class="com.googlecode.httpclientgae.GaeHttpClient" />
 	<bean id="httpClientFactory"
 		class="org.springframework.http.client.CommonsClientHttpRequestFactory">
 		<constructor-arg ref="httpClient" />

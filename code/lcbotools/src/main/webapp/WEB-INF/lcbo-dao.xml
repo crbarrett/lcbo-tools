@@ -13,15 +13,4 @@
 
 	<!-- objectify data objects -->
 	<bean class="com.googlecode.objectify.spring.ObjectifyFactoryBean" p:basePackage="org.cbarrett.lcbo.domain" />
-
-	<!-- LCBO Dao Objects -->
-	<bean id="lcboDatasetDao" class="org.cbarrett.lcbo.db.LCBODatasetDAOImpl">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-
-	<bean id="lcboNewProductDao"
-		class="org.cbarrett.lcbo.db.LCBONewProductDAOImpl">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-
 </beans>
