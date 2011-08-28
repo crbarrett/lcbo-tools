@@ -21,17 +21,16 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import java.util.logging.Logger;
-
 import org.cbarrett.lcbo.db.mapper.LCBOProductRowMapper;
 import org.cbarrett.lcbo.domain.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
 public class LCBONewProductDAOImpl implements LCBONewProductDAO {
-		
-	private final static Logger _log = Logger.getLogger(LCBONewProductDAOImpl.class.getName());
+	private final static Logger _log = LoggerFactory.getLogger(LCBONewProductDAOImpl.class);
 		    
     private SimpleJdbcTemplate simpleJdbcTemplate;    
     private SimpleJdbcInsert insertDataset;
