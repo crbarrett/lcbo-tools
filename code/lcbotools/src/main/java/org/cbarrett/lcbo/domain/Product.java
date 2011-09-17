@@ -236,7 +236,7 @@ public class Product implements DomainObject {
 			int limitedTimeOfferSavingsInCents) {
 		limited_time_offer_savings_in_cents = limitedTimeOfferSavingsInCents;
 	}
-	@JsonDeserialize(using = JsonDateTimeDeserializer.class)
+	@JsonDeserialize(using = JsonShortDateDeserializer.class)
 	@JsonProperty("limited_time_offer_ends_on")
 	public void setLimitedTimeOfferEndsOn(DateTime limitedTimeOfferEndsOn) {
 		this.limitedTimeOfferEndsOn = limitedTimeOfferEndsOn;
