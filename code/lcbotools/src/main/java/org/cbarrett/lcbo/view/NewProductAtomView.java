@@ -33,8 +33,9 @@ import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.feed.atom.Link;
 
 /**
+ * Atom feed view.  http://feedvalidator.org/
+ * 
  * @author cbarrett
- *
  */
 public class NewProductAtomView extends AbstractAtomFeedView {
 
@@ -82,6 +83,10 @@ public class NewProductAtomView extends AbstractAtomFeedView {
 			alternateLinks.add(link);
 			entry.setAlternateLinks(alternateLinks);
 			
+			List<String> authors = new ArrayList<String>();
+			authors.add("Chris Barrett");
+			entry.setAuthors(authors);
+			
 			if (curr.getUpdatedAt() != null) {
 				entry.setUpdated(curr.getUpdatedAt().toDate());
 			} else {
@@ -90,24 +95,25 @@ public class NewProductAtomView extends AbstractAtomFeedView {
 
 			StringBuilder content = new StringBuilder();
 			content.append(curr.getProducer_name());
-			content.append("\n");
+			content.append("&lt;br&gt;");
 			content.append(curr.getPrimary_category());
 			content.append(" (" + curr.getSecondary_category() + ")");
-			content.append("\n");
+			content.append("&lt;br&gt;");
 			content.append(curr.getOrigin());
-			content.append("\n");
+			content.append("&lt;br&gt;");
 			if (curr.getReleasedOn() != null) {
 				content.append("Released On: ");
 				content.append(curr.getReleasedOn().toString(TimeFormats.iso8601DateOnlyFormat));
-				content.append("\n");
+				content.append("&lt;br&gt;");
 			}
-			content.append("<b>");
+			content.append("&lt;b&gt;");
 			content.append(curr.getId());
 			content.append("         ");
 			content.append("$" + curr.getPrice_in_cents()/100);
-			content.append("</b>");
+			content.append("&lt;/b&gt;");
 			
 			Content summary = new Content();
+			summary.setType("html");
 			summary.setValue(content.toString());
 			entry.setSummary(summary);
 			
