@@ -31,6 +31,7 @@ import com.sun.syndication.feed.atom.Content;
 import com.sun.syndication.feed.atom.Entry;
 import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.feed.atom.Link;
+import com.sun.syndication.feed.atom.Person;
 
 /**
  * Atom feed view.  http://feedvalidator.org/
@@ -83,8 +84,11 @@ public class NewProductAtomView extends AbstractAtomFeedView {
 			alternateLinks.add(link);
 			entry.setAlternateLinks(alternateLinks);
 			
-			List<String> authors = new ArrayList<String>();
-			authors.add("Chris Barrett");
+			Person p = new Person();
+			p.setName("Chris Barrett");
+			p.setEmail("christopher.r.barrett@gmail.com");
+			List<Person> authors = new ArrayList<Person>();
+			authors.add(p);
 			entry.setAuthors(authors);
 			
 			if (curr.getUpdatedAt() != null) {
