@@ -97,7 +97,6 @@ public class NewProductAtomView extends AbstractAtomFeedView {
 			
 			Person p = new Person();
 			p.setName("Chris Barrett");
-			p.setEmail("christopher.r.barrett@gmail.com");
 			List<Person> authors = new ArrayList<Person>();
 			authors.add(p);
 			entry.setAuthors(authors);
