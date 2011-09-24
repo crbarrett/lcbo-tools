@@ -48,6 +48,20 @@ public class LCBOServiceController {
 				"newProducts", result);
 		return mav;
 	}
+	@RequestMapping(value = "/{category}/newproducts", method = RequestMethod.GET)
+	public ModelAndView getNewProducts(@PathVariable String category) {
+		List<Product> result = lcboService.getNewProductList(category);
+		ModelAndView mav = new ModelAndView("newproducts",
+				"newProducts", result);
+		return mav;
+	}
+	@RequestMapping(value = "/{stockType}/{category}/newproducts", method = RequestMethod.GET)
+	public ModelAndView getNewProducts(@PathVariable String stockType, @PathVariable String category) {
+		List<Product> result = lcboService.getNewProductList(stockType, category);
+		ModelAndView mav = new ModelAndView("newproducts",
+				"newProducts", result);
+		return mav;
+	}
 	
 	@RequestMapping(value = "/missingdatasets", method = RequestMethod.GET)
 	public ModelAndView getMissingDatasets() {

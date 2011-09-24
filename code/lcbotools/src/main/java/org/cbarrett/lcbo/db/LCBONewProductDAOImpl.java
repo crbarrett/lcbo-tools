@@ -33,16 +33,28 @@ import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 public class LCBONewProductDAOImpl implements LCBONewProductDAO {
 		
     static private Log _log = LogFactory.getLog("LCBONewProductDAOImpl");
-		    
+    
     private SimpleJdbcTemplate simpleJdbcTemplate;    
     private SimpleJdbcInsert insertDataset;
-    
+
+    static private String SELECT = "select CSPC, PRODUCER_NAME, NAME, DESCRIPTION, ALCOHOL_CONTENT, IS_DISCONTINUED, IS_DEAD, STOCK_TYPE, PRICE_IN_CENTS, ORIGIN, PRIMARY_CATEGORY, SECONDARY_CATEGORY, RELEASED_ON, INVENTORY_COUNT, UPDATED_AT, IMAGE_THUMB_URL, IMAGE_URL from NEW_PRODUCTS";
+
     public void setDataSource(DataSource dataSource) {
         this.simpleJdbcTemplate = new SimpleJdbcTemplate(dataSource);
         this.insertDataset = 
             new SimpleJdbcInsert(dataSource).withTableName("NEW_PRODUCTS");    
 	}
 
+    private StringBuilder getSQLSelect() {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(SELECT);
+    	return sb;	
+    }
+    private StringBuilder getSQLSelectWithWhere(String whereClause) {
+    	return getSQLSelect().append(whereClause);
+    }
+    
 	public void truncate() {
 		this.simpleJdbcTemplate.getJdbcOperations().execute(
 				"truncate table new_products");	
@@ -76,8 +88,23 @@ public class LCBONewProductDAOImpl implements LCBONewProductDAO {
 	}
 	
 	public List<Product> selectAll() {
-		return this.simpleJdbcTemplate.query("select CSPC, PRODUCER_NAME, NAME, DESCRIPTION, ALCOHOL_CONTENT, IS_DISCONTINUED, IS_DEAD, STOCK_TYPE, PRICE_IN_CENTS, ORIGIN, PRIMARY_CATEGORY, SECONDARY_CATEGORY, RELEASED_ON, INVENTORY_COUNT, UPDATED_AT, IMAGE_THUMB_URL, IMAGE_URL from NEW_PRODUCTS",
+		return this.simpleJdbcTemplate.query(getSQLSelect().toString(),
 				new LCBOProductRowMapper());		
+	}
+	public List<Product> selectAll(String category) {
+		return this.simpleJdbcTemplate.query(getSQLSelectWithWhere(" where PRIMARY_CATEGORY = ?").toString(),
+				new LCBOProductRowMapper(),
+				new Object[] { category });		
+	}
+	public List<Product> selectAll(String stockType, String category) {
+		String operator = "=";
+		if ("%".equals(category)) {
+			operator = "LIKE";
+		}
+
+		return this.simpleJdbcTemplate.query(getSQLSelectWithWhere(" where STOCK_TYPE = ? AND PRIMARY_CATEGORY " + operator + " ?").toString(),
+				new LCBOProductRowMapper(),
+				new Object[] { stockType, category });		
 	}
 	
 }

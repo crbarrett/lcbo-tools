@@ -104,6 +104,16 @@ public class LCBOServiceImpl implements LCBOService {
 	public List<Product> getNewProductList() {
 		return lcboNewProductDAO.selectAll();
 	}
+	public List<Product> getNewProductList(String category) {
+		return lcboNewProductDAO.selectAll(category);
+	}
+	public List<Product> getNewProductList(String stockType, String category) {
+		// allow for all categories to be queried
+		if ("all".equalsIgnoreCase(category)) {
+			category = "%";
+		}
+		return lcboNewProductDAO.selectAll(stockType, category);
+	}
 	
 	public Product getProductDetails(String cspc) {
 		return lcboClient.getProduct(cspc);

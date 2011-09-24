@@ -27,4 +27,6 @@ public interface LCBONewProductDAO {
 	void truncate();
 	void add(Product product);
 	List<Product> selectAll();
+	List<Product> selectAll(String category);
+	List<Product> selectAll(String stockType, String category);
 }
