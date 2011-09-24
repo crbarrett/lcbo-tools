@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Error</title>
-	<link rel="stylesheet" type="text/css" href="css/simple.css" />	
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/simple.css" />	
 </head>
 <body>
 	<h2>Bad things happened, sorry.</h2>
