@@ -36,8 +36,8 @@ public class LCBOServiceController {
 	@RequestMapping(value = "/resetdataset", method = RequestMethod.GET)
 	public ModelAndView resetDatasetInfo() {
 		String result = lcboService.resetDatasets();
-		ModelAndView mav = new ModelAndView("reset",
-				"reset", result);
+		ModelAndView mav = new ModelAndView("resetdataset",
+				"resetDataset", result);
 		return mav;
 	}
 
