@@ -40,12 +40,22 @@ import com.sun.syndication.feed.atom.Person;
  */
 public class NewProductAtomView extends AbstractAtomFeedView {
 
+	private static final String LCBOBABY_LINK = "http://maggie.dynalias.org/lcbotools/newproducts.atom";
 	private static final String LCBO_LINK = "http://lcbo.com/lcbo-ear/lcbo/product/details.do?language=EN&itemNumber=";
 			
 	@Override
 	protected void buildFeedMetadata(Map<String, Object> model, Feed feed, HttpServletRequest request) {
-		feed.setId("http://lcbobaby.com");
+		feed.setId("http://lcbobaby.com/");
 		feed.setTitle("New LCBO Product Listings");
+		
+		List<Link> alternateLinks = new ArrayList<Link>();
+		Link link = new Link();
+		link.setHref(LCBOBABY_LINK);
+		link.setType("text/html");
+		link.setRel("self");
+		alternateLinks.add(link);		
+		feed.setAlternateLinks(alternateLinks);
+		
 		@SuppressWarnings("unchecked")
 		List<Product> productList = (List<Product>) model.get("newProducts");
 		
@@ -81,7 +91,7 @@ public class NewProductAtomView extends AbstractAtomFeedView {
 			Link link = new Link();
 			link.setHref(LCBO_LINK + curr.getId());
 			link.setType("text/html");
-			link.setRel("self");
+			link.setRel("alternate");
 			alternateLinks.add(link);
 			entry.setAlternateLinks(alternateLinks);
 			
@@ -100,22 +110,22 @@ public class NewProductAtomView extends AbstractAtomFeedView {
 
 			StringBuilder content = new StringBuilder();
 			content.append(curr.getProducer_name());
-			content.append("&lt;br&gt;");
+			content.append("&amp;lt;br&amp;gt;");
 			content.append(curr.getPrimary_category());
 			content.append(" (" + curr.getSecondary_category() + ")");
-			content.append("&lt;br&gt;");
+			content.append("&amp;lt;br&amp;gt;");
 			content.append(curr.getOrigin());
-			content.append("&lt;br&gt;");
+			content.append("&amp;lt;br&amp;gt;");
 			if (curr.getReleasedOn() != null) {
 				content.append("Released On: ");
 				content.append(curr.getReleasedOn().toString(TimeFormats.iso8601DateOnlyFormat));
-				content.append("&lt;br&gt;");
+				content.append("&amp;lt;br&amp;gt;");
 			}
-			content.append("&lt;b&gt;");
+			content.append("&amp;lt;b&amp;gt;");
 			content.append(curr.getId());
 			content.append("         ");
 			content.append("$" + curr.getPrice_in_cents()/100);
-			content.append("&lt;/b&gt;");
+			content.append("&amp;lt;/b&amp;gt;");
 			
 			Content summary = new Content();
 			summary.setType("html");
