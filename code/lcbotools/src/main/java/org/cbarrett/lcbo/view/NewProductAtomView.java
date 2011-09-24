@@ -131,9 +131,9 @@ public class NewProductAtomView extends AbstractAtomFeedView {
 			body.append("<b>");
 			body.append(curr.getId());
 			body.append("         ");
-			body.append("$" + curr.getPrice_in_cents()/100);
-			body.append("</b>");
+			body.append("$" + curr.getPrice_in_cents()/100.00);
 			
+			body.append("</b>");
 			body.append("</body>");
 			body.append("</html>");
 			
