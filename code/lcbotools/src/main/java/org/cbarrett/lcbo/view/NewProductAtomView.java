@@ -108,29 +108,31 @@ public class NewProductAtomView extends AbstractAtomFeedView {
 				entry.setUpdated(new java.util.Date());
 			}
 
-			StringBuilder content = new StringBuilder();
-			content.append(curr.getProducer_name());
-			content.append("&amp;lt;br&amp;gt;");
-			content.append(curr.getPrimary_category());
-			content.append(" (" + curr.getSecondary_category() + ")");
-			content.append("&amp;lt;br&amp;gt;");
-			content.append(curr.getOrigin());
-			content.append("&amp;lt;br&amp;gt;");
+			StringBuilder body = new StringBuilder();
+			body.append(curr.getProducer_name());
+			body.append("&lt;br&gt;");
+			body.append(curr.getPrimary_category());
+			body.append(" (" + curr.getSecondary_category() + ")");
+			body.append("&lt;br&gt;");
+			body.append(curr.getOrigin());
+			body.append("&lt;br&gt;");
 			if (curr.getReleasedOn() != null) {
-				content.append("Released On: ");
-				content.append(curr.getReleasedOn().toString(TimeFormats.iso8601DateOnlyFormat));
-				content.append("&amp;lt;br&amp;gt;");
+				body.append("Released On: ");
+				body.append(curr.getReleasedOn().toString(TimeFormats.iso8601DateOnlyFormat));
+				body.append("&lt;br&gt;");
 			}
-			content.append("&amp;lt;b&amp;gt;");
-			content.append(curr.getId());
-			content.append("         ");
-			content.append("$" + curr.getPrice_in_cents()/100);
-			content.append("&amp;lt;/b&amp;gt;");
+			body.append("&lt;b&gt;");
+			body.append(curr.getId());
+			body.append("         ");
+			body.append("$" + curr.getPrice_in_cents()/100);
+			body.append("&lt;/b&gt;");
 			
-			Content summary = new Content();
-			summary.setType("html");
-			summary.setValue(content.toString());
-			entry.setSummary(summary);
+			List<Content> contents = new ArrayList<Content>();
+			Content content = new Content();
+			content.setType(Content.HTML);
+			content.setValue(body.toString());
+			contents.add(content);
+			entry.setContents(contents);
 			
 			entries.add(entry);
 		}
