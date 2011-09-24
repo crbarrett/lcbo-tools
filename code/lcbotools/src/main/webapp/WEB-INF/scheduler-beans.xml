@@ -16,7 +16,7 @@
 	<bean id="missingDatasetsTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="missingDatasetsJob" />
 		<!-- run every day at 6am -->
-		<property name="cronExpression" value="0 0 6 * * ?" />
+		<property name="cronExpression" value="0 0 6 57 * ?" />
 	</bean>
 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
