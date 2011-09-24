@@ -81,6 +81,7 @@ public class NewProductAtomView extends AbstractAtomFeedView {
 			Link link = new Link();
 			link.setHref(LCBO_LINK + curr.getId());
 			link.setType("text/html");
+			link.setRel("self");
 			alternateLinks.add(link);
 			entry.setAlternateLinks(alternateLinks);
 			
