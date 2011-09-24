@@ -34,7 +34,7 @@ import com.sun.syndication.feed.atom.Link;
 import com.sun.syndication.feed.atom.Person;
 
 /**
- * Atom feed view.  http://feedvalidator.org/
+ * Atom feed view.  Validate with http://feedvalidator.org/
  * 
  * @author cbarrett
  */
@@ -83,7 +83,6 @@ public class NewProductAtomView extends AbstractAtomFeedView {
 			Entry entry = new Entry();
 			
 			String date = String.format("%1$tY-%1$tm-%1$td", (curr.getUpdatedAt() == null) ? new java.util.Date() : curr.getUpdatedAt().toDate());
-
 			entry.setId(String.format("tag:lcbobaby.com,%s:%s", date, curr.getId()));
 			entry.setTitle(String.format("%s", curr.getName()));
 			
@@ -108,23 +107,35 @@ public class NewProductAtomView extends AbstractAtomFeedView {
 			}
 
 			StringBuilder body = new StringBuilder();
+			body.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">");
+			body.append("<html>");
+			body.append("<head>");
+			body.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
+
+			body.append("<title>LCBO Product</title>");
+			body.append("</head>");
+			body.append("<body>");
+
 			body.append(curr.getProducer_name());
-			body.append("&lt;br&gt;");
+			body.append("<br>");
 			body.append(curr.getPrimary_category());
 			body.append(" (" + curr.getSecondary_category() + ")");
-			body.append("&lt;br&gt;");
+			body.append("<br>");
 			body.append(curr.getOrigin());
-			body.append("&lt;br&gt;");
+			body.append("<br>");
 			if (curr.getReleasedOn() != null) {
 				body.append("Released On: ");
 				body.append(curr.getReleasedOn().toString(TimeFormats.iso8601DateOnlyFormat));
-				body.append("&lt;br&gt;");
+				body.append("<br>");
 			}
-			body.append("&lt;b&gt;");
+			body.append("<b>");
 			body.append(curr.getId());
 			body.append("         ");
 			body.append("$" + curr.getPrice_in_cents()/100);
-			body.append("&lt;/b&gt;");
+			body.append("</b>");
+			
+			body.append("</body>");
+			body.append("</html>");
 			
 			List<Content> contents = new ArrayList<Content>();
 			Content content = new Content();
