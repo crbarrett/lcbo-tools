@@ -18,7 +18,7 @@
 	<display:table id="product" name="${newProducts}">
 		<display:setProperty name="basic.msg.empty_list" value="No new products to display."/>		
 		<display:column title="CSPC">
-			<a href="product/${product.id}.html">
+			<a href="${pageContext.request.contextPath}/product/${product.id}.html">
 				<c:out value="${product.id}" />
 			</a>
 		</display:column>
