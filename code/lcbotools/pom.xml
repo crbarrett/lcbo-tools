@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>org.cbarrett</groupId>
 			<artifactId>domain-ext</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
@@ -131,7 +131,7 @@
 		<dependency>
 			<groupId>org.cbarrett</groupId>
 			<artifactId>spring-ext</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.1-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
