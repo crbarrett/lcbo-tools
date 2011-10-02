@@ -16,18 +16,26 @@
 
 	<tx:annotation-driven />
 	<mvc:annotation-driven />
-	
+
 	<!-- static resource handling -->
-	<mvc:default-servlet-handler/>
+	<mvc:default-servlet-handler />
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 
 	<!-- Rest content negotiation and view handling -->
 	<bean
 		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
-		p:order="1">
+		p:order="2">
 		<property name="mediaTypes">
 			<map>
 				<entry key="html" value="text/html" />
-				<entry key="atom" value="application/atom+xml"/>
+				<entry key="atom" value="application/atom+xml" />
 				<entry key="xml" value="text/xml" />
 				<entry key="json" value="application/json" />
 			</map>
@@ -55,7 +63,7 @@
 		</property>
 		<property name="viewResolvers">
 			<list>
-				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
 				<bean
 					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 					<property name="viewClass"
@@ -68,7 +76,7 @@
 		</property>
 	</bean>
 
-	<bean id="newproducts" class="org.cbarrett.lcbo.view.NewProductAtomView"/>
+	<bean id="newproducts" class="org.cbarrett.lcbo.view.NewProductAtomView" />
 
 	<bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
@@ -103,9 +111,10 @@
 		<property name="releaseHelperThreads" value="3" />
 	</bean>
 	<!-- transaction manager for above data source -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"/>
-	</bean>	
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 	<import resource="lcbo-dao.xml" />
 	<import resource="lcborest-beans.xml" />

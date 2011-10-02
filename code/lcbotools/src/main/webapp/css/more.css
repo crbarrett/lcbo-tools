@@ -1,0 +1,132 @@
+@CHARSET "UTF-8";
+
+a {
+	text-decoration: none;
+	color: #33a;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+body {
+	width: 800px;
+}
+
+body,td,th {
+	font-family: verdana, sans-serif;
+	font-size: x-small;
+	voice-family: "\"}\"";
+	voice-family: inherit;
+	font-size: small;
+}
+
+table {
+	border-collapse: collapse;
+	margin: 0.5em auto;
+	border: 1px solid;
+}
+
+table caption {
+	margin: 1em auto 0.2em;
+	font-size: small;
+	font-style: italic;
+	text-align: center;
+}
+
+table th,table td {
+	padding: 0.2em;
+	border: 1px solid;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	margin: 1em 0 0.2em 0;
+	border-bottom: 1px solid #ccc;
+	font-family: arial, verdana, sans-serif;
+}
+
+#header h1 {
+	border: 0;
+}
+
+h1 {
+	font-size: 180%;
+	font-weight: normal;
+}
+
+h2 {
+	font-size: 160%;
+	font-weight: normal;
+}
+
+h3 {
+	font-size: 130%;
+	font-weight: normal;
+}
+
+h4 {
+	font-size: 110%;
+}
+
+h5 {
+	font-size: 80%;
+}
+
+h6 {
+	font-size: 90%;
+	border: 0;
+}
+
+:link {
+	color: #039;
+}
+
+:visited {
+	color: #636;
+}
+
+:link:hover,:visited:hover {
+	color: #333;
+}
+
+:link:active,:link:active {
+	color: #000;
+}
+
+code {
+	background-color: #f9f9f9;
+}
+
+pre {
+	padding: 1em;
+	border: 1px dashed #2f6fab;
+	color: black;
+	background-color: #f9f9f9;
+	line-height: 1.1em;
+}
+
+table {
+	border-width: 1;
+	border-color: black;
+	border-style: solid;
+	padding: 0;
+	margin: 0;
+}
+
+td,th {
+	border-width: 1;
+	border-color: black;
+	border-style: solid;
+}
+
+.style1 {
+	color: #FF0000
+}
+
+.style2 {
+	font-weight: bold
+}
+
+.style3 {
+	color: #000000
+}
